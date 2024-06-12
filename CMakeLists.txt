@@ -6,7 +6,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/build)
 
 add_executable(server source/server.c)
 add_executable(client source/client.c)
-add_executable(admin source/admin.c)
 
 add_definitions ("-Wall")
 add_definitions ("-Wextra")
