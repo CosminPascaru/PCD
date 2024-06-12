@@ -165,8 +165,7 @@ server_addr.sin_family = AF_INET;
     while (1)
     {
         client_sock = accept(server_sock, (struct sockaddr *)&client_addr, &addr_len);
-        if (client_sock < 0)
-        {
+        if (client_sock < 0){
             perror("accept");
             continue;
         }

@@ -11,6 +11,20 @@
 
 _Atomic int thread_counter = 0;
 
+void removeWhitespaces(char *str) {
+    char *readPtr = str;  // Pointer to read through the original string
+    char *writePtr = str; // Pointer to write the new string without whitespaces
+
+    while (*readPtr != '\0') {
+        if (!isspace(*readPtr)) {
+            *writePtr = *readPtr;
+            writePtr++;
+        }
+        readPtr++;
+    }
+    *writePtr = '\0'; // Null-terminate the modified string
+}
+
 void process_file(const char *filename)
 {
     printf("Processing file: %s\n", filename);
@@ -47,7 +61,6 @@ void process_file(const char *filename)
             wait(NULL);
         }
     }
- 
 }
 
 void *handle_client(void *arg)
@@ -58,7 +71,10 @@ void *handle_client(void *arg)
 
     char buffer[BUFFER_SIZE];
     ssize_t bytes_received = recv(client_sock, buffer, 40, 0); //get the filename from the client
+    printf("%s-------\n",buffer);
     
+    removeWhitespaces(buffer);
+
     if (bytes_received <= 0)
     {
         perror("recv filename");
@@ -84,7 +100,7 @@ void *handle_client(void *arg)
 
     while ((bytes_received = recv(client_sock, buffer, BUFFER_SIZE, 0)) > 0) //get the content of the file and write it in a new file
     {
-        printf("%s", buffer);
+        //printf("%s", buffer);
         fwrite(buffer, 1, bytes_received, file);
     }
 
@@ -168,6 +184,7 @@ int main()
 
     while (1)
     {
+        printf("\n\nlmao\n\n");
         client_sock = accept(server_sock, (struct sockaddr *)&client_addr, &addr_len);
         if (client_sock < 0)
         {
