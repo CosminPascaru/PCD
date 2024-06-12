@@ -81,7 +81,7 @@ The client program connects to the server, sends files for processing, and recei
 #### Server
 1. Compile the server program:
    ```sh
-   gcc -o server server.c -lpthread
+   gcc -o server server.c
    ```
 2. Run the server program:
    ```sh
