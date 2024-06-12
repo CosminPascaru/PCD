@@ -122,8 +122,7 @@ void *handle_client(void *arg)
         }
     }
 
-    if (ferror(file))
-    {
+    if (ferror(file)){
         perror("fread file");
     }
 
@@ -133,25 +132,22 @@ void *handle_client(void *arg)
     return NULL;
 }
 
-int main()
-{
+int main(){
     int server_sock, client_sock;
     struct sockaddr_in server_addr, client_addr;
     socklen_t addr_len = sizeof(client_addr);
 
     server_sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (server_sock < 0)
-    {
-        perror("socket");
-        return EXIT_FAILURE;
+    if (server_sock < 0){
+perror("socket");
+return EXIT_FAILURE;
     }
 
-    server_addr.sin_family = AF_INET;
+server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(PORT);
     server_addr.sin_addr.s_addr = INADDR_ANY;
 
-    if (bind(server_sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
-    {
+    if (bind(server_sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0){
         perror("bind");
         close(server_sock);
         return EXIT_FAILURE;
@@ -179,10 +175,10 @@ int main()
         *pclient = client_sock;
 
         pthread_t thread;
-        pthread_create(&thread, NULL, handle_client, pclient);
-        pthread_detach(thread);
+pthread_create(&thread, NULL, handle_client, pclient);
+pthread_detach(thread);
     }
 
-    close(server_sock);
-    return EXIT_SUCCESS;
+close(server_sock);
+return EXIT_SUCCESS;
 }

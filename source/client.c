@@ -11,7 +11,7 @@
 int is_valid_extension(const char *filename) {
     const char *ext = strrchr(filename, '.');
     if (ext != NULL) {
-        if (strcmp(ext, ".c") == 0 || strcmp(ext, ".cpp") == 0 || strcmp(ext, ".py") == 0) {
+        if (strcmp(ext, ".c") == 0 || strcmp(ext, ".cpp") == 0 || strcmp(ext, ".py") == 0 || strcmp(ext, ".cs") == 0 || strcmp(ext, ".java") == 0) {
             return 1;
         }
     }
